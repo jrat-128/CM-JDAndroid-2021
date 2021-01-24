@@ -19,4 +19,33 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <!--Image view in which image will be set-->
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:layout_marginBottom="50dp"
+        android:contentDescription="@string/camerafeed"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_camera_dark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--Button to capture image-->
+    <Button
+        android:id="@+id/capture_image_btn"
+        style="@style/Base.Widget.AppCompat.Button.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:text="@string/capture_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_view" />
 </androidx.constraintlayout.widget.ConstraintLayout>

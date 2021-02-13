@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +26,14 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.tourlogandroid.R;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import static android.app.Activity.RESULT_OK;
+
+// Based on a solution found at https://devofandroid.blogspot.com/2018/09/take-picture-with-camera-android-studio.html
 
 public class CameraFragment extends Fragment {
 
@@ -38,19 +46,13 @@ public class CameraFragment extends Fragment {
     ImageView mImageView;
     Uri image_uri;
 
+    String currentPhotoPath;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         cameraViewModel =
                 new ViewModelProvider(this).get(CameraViewModel.class);
         View root = inflater.inflate(R.layout.fragment_camera, container, false);
-        // Textview for Fragment transition testing
-        final TextView textView = root.findViewById(R.id.text_camera);
-        cameraViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
 
         mImageView = root.findViewById(R.id.image_view);
         mCaptureBtn = root.findViewById(R.id.capture_image_btn);
@@ -67,8 +69,10 @@ public class CameraFragment extends Fragment {
 
     private void openCamera() {
         ContentValues values = new ContentValues();
-        values.put(MediaStore.Images.Media.TITLE, "New Picture");
-        values.put(MediaStore.Images.Media.DESCRIPTION, "From the Camera");
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "TourLog_" + timeStamp + "_";
+        values.put(MediaStore.Images.Media.TITLE, imageFileName);
+        values.put(MediaStore.Images.Media.DESCRIPTION, "At < Location >");
         image_uri = getActivity().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
         //Camera intent
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -99,6 +103,9 @@ public class CameraFragment extends Fragment {
         if (resultCode == RESULT_OK){
             //set the image captured to our ImageView
             mImageView.setImageURI(image_uri);
+            //save the image to our specified path
+
         }
     }
+
 }

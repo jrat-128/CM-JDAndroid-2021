@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "1067500497554",
+    "firebase_url": "https://tourlog-ce4d6.firebaseio.com",
+    "project_id": "tourlog-ce4d6",
+    "storage_bucket": "tourlog-ce4d6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1067500497554:android:9d8e19c9ff916b664d544b",
+        "android_client_info": {
+          "package_name": "com.example.flutter_project_v1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1067500497554-i58esr577a7hdeu3rr32ethnpcj1ipb4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhFp7R3Gol9fQkjNnhX_TBmeyguKHyHYQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1067500497554-i58esr577a7hdeu3rr32ethnpcj1ipb4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1067500497554:android:c58253847b4621e24d544b",
+        "android_client_info": {
+          "package_name": "com.example.tourlogandroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1067500497554-i58esr577a7hdeu3rr32ethnpcj1ipb4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhFp7R3Gol9fQkjNnhX_TBmeyguKHyHYQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1067500497554-i58esr577a7hdeu3rr32ethnpcj1ipb4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

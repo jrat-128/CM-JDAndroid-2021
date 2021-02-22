@@ -4,47 +4,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/black"
     tools:context=".ui.map.MarkerInfoFragment">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/cardview_dark_background">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/cardview_dark_background"
             android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/markerImage"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@mipmap/ic_launcher" />
+                android:layout_marginBottom="16dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_launcher_background" />
 
             <TextView
                 android:id="@+id/markerLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="left"
+                android:layout_marginBottom="16dp"
                 android:text="Title"
-                android:textColor="@color/black"
-                android:textSize="25sp"
-                android:textStyle="bold"/>
+                android:textColor="@color/white"
+                android:textSize="25sp" />
 
             <TextView
                 android:id="@+id/markerDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:gravity="start"
                 android:text="Description"
-                android:textAlignment="textStart"/>
+                android:textAlignment="textStart"
+                android:textColor="@color/quantum_grey" />
 
-            <ImageButton
-                android:id="@+id/imageButton"
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/favButton"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_favourites" />
+                android:gravity="left"
+                android:text="Add to Favorites"
+                android:textColor="@color/quantum_googblue"
+                app:backgroundTint="@color/cardview_dark_background" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </LinearLayout>

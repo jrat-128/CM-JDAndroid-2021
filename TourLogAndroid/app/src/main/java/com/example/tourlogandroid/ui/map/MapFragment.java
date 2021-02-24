@@ -12,8 +12,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,8 +35,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -46,6 +50,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MapFragment extends Fragment implements GoogleMap.OnCameraMoveListener, OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
@@ -58,7 +63,9 @@ public class MapFragment extends Fragment implements GoogleMap.OnCameraMoveListe
     // Firebase
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     double markerLat = 0, markerLng = 0;
-    HashMap<String,dbModel> points = new HashMap<String,dbModel>();
+    public HashMap<String,dbModel> points = new HashMap<String,dbModel>();
+
+    private Button favorites;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -89,6 +96,7 @@ public class MapFragment extends Fragment implements GoogleMap.OnCameraMoveListe
             ActivityCompat.requestPermissions(getActivity()
                     ,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},44);
         }
+        View v = inflater.inflate(R.layout.fragment_marker_info, container, false);
 
         return view;
     }
@@ -160,6 +168,8 @@ public class MapFragment extends Fragment implements GoogleMap.OnCameraMoveListe
                                 dbModel tmp = new dbModel(document.getString("name"),
                                         document.getString("info"),
                                         document.getString("image"),
+                                        document.getString("address"),
+                                        document.getString("id"),
                                         document.getBoolean("fav"));
                                 markerLat = document.getGeoPoint("position").getLatitude();
                                 markerLng = document.getGeoPoint("position").getLongitude();
@@ -190,6 +200,8 @@ public class MapFragment extends Fragment implements GoogleMap.OnCameraMoveListe
                                 dbModel tmp = new dbModel(document.getString("name"),
                                         document.getString("info"),
                                         document.getString("image"),
+                                        document.getString("address"),
+                                        document.getString("id"),
                                         document.getBoolean("fav"));
                                 markerLat = document.getGeoPoint("position").getLatitude();
                                 markerLng = document.getGeoPoint("position").getLongitude();
@@ -220,15 +232,53 @@ public class MapFragment extends Fragment implements GoogleMap.OnCameraMoveListe
         TextView dialog_box_title;
         TextView dialog_box_info;
         ImageView dialog_box_image;
+        Button dialog_box_button;
 
         dialog_box_title = dialogView.findViewById(R.id.markerLocation);
         dialog_box_info = dialogView.findViewById(R.id.markerDescription);
         dialog_box_image = dialogView.findViewById(R.id.markerImage);
+        dialog_box_button = dialogView.findViewById(R.id.favButton);
 
         dialog_box_title.setText(tmp.getName());
+
         dialog_box_info.setText(tmp.getInfo());
+
         LoadImage loadImage = new LoadImage(dialog_box_image);
         loadImage.execute(tmp.getImage());
+
+        if(tmp.isFav()) {
+            dialog_box_button.setText("FAVORITE");
+        }else{
+            dialog_box_button.setText("ADD TO FAVORITES");
+            dialog_box_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Map<String,Object> favorite = new HashMap<>();
+                    favorite.put("name",tmp.getName());
+                    favorite.put("address",tmp.getAddress());
+                    db.collection("favorites")
+                            .add(favorite)
+                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                @Override
+                                public void onSuccess(DocumentReference documentReference) {
+                                    Log.d("DEBUG", "DocumentSnapshot added with ID: " + documentReference.getId());
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.w("WARNING", "Error adding document", e);
+                                }
+                            });
+                    Map<String,Object> upDate = new HashMap<>();
+                    upDate.put("fav",true);
+                    tmp.setFav(true);
+                    db.collection("locations").document(tmp.getiD()).update(upDate);
+                    dialog_box_button.setText("FAVORITE");
+                }
+            });
+        }
+
         builder.setView(dialogView);
         builder.setCancelable(true);
         builder.show();

@@ -1,66 +1,70 @@
 package com.example.tourlogandroid.ui.gallery;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.tourlogandroid.R;
 import com.example.tourlogandroid.ui.gallery.Picture.PictureContent.PictureItem;
 import com.example.tourlogandroid.ui.gallery.Picture.PictureContent;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link PictureItem}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class MyImageRecyclerViewAdapter extends RecyclerView.Adapter<MyImageRecyclerViewAdapter.ViewHolder> {
+public class MyImageRecyclerViewAdapter extends RecyclerView.Adapter<MyImageRecyclerViewAdapter.MyViewHolde> {
+    Context context;
+    private ArrayList<String> imageData = new ArrayList<String>();
 
-    private final List<PictureItem> mValues;
 
-    public MyImageRecyclerViewAdapter(List<PictureContent.PictureItem> items) {
-        mValues = items;
+    public MyImageRecyclerViewAdapter(ArrayList<String> imageData, FragmentActivity activity) {
+        this.imageData = imageData;
+        this.context = activity;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
+    public MyImageRecyclerViewAdapter.MyViewHolde onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_gallery, parent, false);
-        return new ViewHolder(view);
+
+        return new MyViewHolde(itemView);
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        // holder.mContentView.setText(mValues.get(position).content);
+    public void onBindViewHolder(MyImageRecyclerViewAdapter.MyViewHolde holder, int position) {
+        String data = imageData.get(position);
+        if (data != null){
+            Glide.with(context).load(data).into(holder.singleImageView);
+
+        }else {
+            Toast.makeText(context, "Images Empty", Toast.LENGTH_SHORT).show();
+        }
+
+
     }
 
     @Override
     public int getItemCount() {
-        return mValues.size();
+        return imageData.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
-        public final TextView mIdView;
-        public final ImageView mContentView;
-        public PictureItem mItem;
+    public class MyViewHolde extends RecyclerView.ViewHolder {
+        ImageView singleImageView;
 
-        public ViewHolder(View view) {
-            super(view);
-            mView = view;
-            mIdView = (TextView) view.findViewById(R.id.item_number);
-            mContentView = (ImageView) view.findViewById(R.id.image_view_content);
-        }
-
-        @Override
-        public String toString() {
-            return super.toString();
+        public MyViewHolde(View itemView) {
+            super(itemView);
+            singleImageView = (ImageView) itemView.findViewById(R.id.image_view_content);
         }
     }
 }

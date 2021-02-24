@@ -5,22 +5,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.tourlogandroid.R;
-import com.example.tourlogandroid.ui.gallery.dummy.DummyContent.DummyItem;
+import com.example.tourlogandroid.ui.gallery.Picture.PictureContent.PictureItem;
+import com.example.tourlogandroid.ui.gallery.Picture.PictureContent;
 
 import java.util.List;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem}.
+ * {@link RecyclerView.Adapter} that can display a {@link PictureItem}.
  * TODO: Replace the implementation with code for your data type.
  */
 public class MyImageRecyclerViewAdapter extends RecyclerView.Adapter<MyImageRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
+    private final List<PictureItem> mValues;
 
-    public MyImageRecyclerViewAdapter(List<DummyItem> items) {
+    public MyImageRecyclerViewAdapter(List<PictureContent.PictureItem> items) {
         mValues = items;
     }
 
@@ -35,7 +37,7 @@ public class MyImageRecyclerViewAdapter extends RecyclerView.Adapter<MyImageRecy
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        // holder.mContentView.setText(mValues.get(position).content);
     }
 
     @Override
@@ -46,19 +48,19 @@ public class MyImageRecyclerViewAdapter extends RecyclerView.Adapter<MyImageRecy
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final TextView mIdView;
-        public final TextView mContentView;
-        public DummyItem mItem;
+        public final ImageView mContentView;
+        public PictureItem mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
             mIdView = (TextView) view.findViewById(R.id.item_number);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            mContentView = (ImageView) view.findViewById(R.id.image_view_content);
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString();
         }
     }
 }

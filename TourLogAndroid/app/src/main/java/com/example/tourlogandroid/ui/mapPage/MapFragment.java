@@ -1,4 +1,4 @@
-package com.example.tourlogandroid.ui.map;
+package com.example.tourlogandroid.ui.mapPage;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -15,14 +15,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.tourlogandroid.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -47,18 +43,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class MapFragment extends Fragment implements GoogleMap.OnCameraMoveListener, OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
-    FusedLocationProviderClient fusedLocationProviderClient;
-
     // Google Maps Variables
     GoogleMap map;
     double currentLat = 0, currentLng = 0;
+    FusedLocationProviderClient fusedLocationProviderClient;
 
     // Firebase
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -74,6 +67,9 @@ public class MapFragment extends Fragment implements GoogleMap.OnCameraMoveListe
 
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.google_map);
+
+        // Start Maps on user location
+
         mapFragment.getMapAsync(this);
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getContext());
@@ -153,10 +149,10 @@ public class MapFragment extends Fragment implements GoogleMap.OnCameraMoveListe
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
-        // Initiate map on user position
         map = googleMap;
         map.setOnCameraMoveListener(this);
         map.setOnMarkerClickListener(this);
+
         // Add Markers to map
         db.collection("locations")
                 .get()
@@ -187,6 +183,8 @@ public class MapFragment extends Fragment implements GoogleMap.OnCameraMoveListe
 
     @Override
     public void onCameraMove() {
+
+        // Actualize visible markers
         map.clear();
         points.clear();
         LatLng cameraPos = map.getCameraPosition().target;
@@ -225,6 +223,8 @@ public class MapFragment extends Fragment implements GoogleMap.OnCameraMoveListe
 
     @Override
     public boolean onMarkerClick(Marker marker) {
+
+        // Display dialog fragment on marker click
         AlertDialog.Builder builder = new AlertDialog.Builder(getView().getContext());
         View dialogView = LayoutInflater.from(getView().getContext()).inflate(R.layout.fragment_marker_info,null);
         dbModel tmp = points.get(marker.getTitle());
@@ -240,7 +240,6 @@ public class MapFragment extends Fragment implements GoogleMap.OnCameraMoveListe
         dialog_box_button = dialogView.findViewById(R.id.favButton);
 
         dialog_box_title.setText(tmp.getName());
-
         dialog_box_info.setText(tmp.getInfo());
 
         LoadImage loadImage = new LoadImage(dialog_box_image);

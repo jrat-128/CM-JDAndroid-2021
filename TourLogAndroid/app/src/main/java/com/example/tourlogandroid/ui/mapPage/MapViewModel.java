@@ -1,4 +1,4 @@
-package com.example.tourlogandroid.ui.map;
+package com.example.tourlogandroid.ui.mapPage;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

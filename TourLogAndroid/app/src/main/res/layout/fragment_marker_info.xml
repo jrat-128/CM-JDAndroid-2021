@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/black"
-    tools:context=".ui.map.MarkerInfoFragment">
+    tools:context=".ui.mapPage.MarkerInfoFragment">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"

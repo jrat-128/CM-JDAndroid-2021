@@ -8,16 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.tourlogandroid.R;
-import com.example.tourlogandroid.ui.gallery.Picture.PictureContent.PictureItem;
-import com.example.tourlogandroid.ui.gallery.Picture.PictureContent;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link PictureItem}.

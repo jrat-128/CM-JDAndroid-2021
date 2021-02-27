@@ -27,16 +27,9 @@ tools:context=".ui.gallery.GalleryFragment">
         android:orientation="horizontal"
         tools:ignore="MissingConstraints">
 
-        <TextView
-            android:id="@+id/item_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            android:textAppearance="?attr/textAppearanceListItem" />
-
         <ImageView
             android:id="@+id/image_view_content"
-            android:layout_width="150pt"
+            android:layout_width="175pt"
             android:layout_height="150pt"
             android:layout_marginBottom="50dp"
             android:contentDescription="@string/camerafeed"

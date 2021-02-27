@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.core.content.PermissionChecker;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -45,6 +46,7 @@ public class CameraFragment extends Fragment {
     Button mCaptureBtn;
     ImageView mImageView;
     Uri image_uri;
+    String imageFileName;
 
     String currentPhotoPath;
 
@@ -72,7 +74,17 @@ public class CameraFragment extends Fragment {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "TourLog_" + timeStamp + "_";
         values.put(MediaStore.Images.Media.TITLE, imageFileName);
-        values.put(MediaStore.Images.Media.DESCRIPTION, "At < Location >");
+        values.put(MediaStore.Images.Media.DESCRIPTION, "Image taken through TourLog");
+/*
+        // folder path
+        String folderPath = Environment.getExternalStorageDirectory() + "/TourLog";
+        File folder = new File(folderPath);
+        if (!folder.exists()) { // create folder if it does not yet exist
+            File wallpaperDirectory = new File(folderPath);
+            wallpaperDirectory.mkdirs();
+        }
+        path_uri.fromFile(folder);
+*/
         image_uri = getActivity().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
         //Camera intent
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -103,9 +115,6 @@ public class CameraFragment extends Fragment {
         if (resultCode == RESULT_OK){
             //set the image captured to our ImageView
             mImageView.setImageURI(image_uri);
-            //save the image to our specified path
-
         }
     }
-
 }

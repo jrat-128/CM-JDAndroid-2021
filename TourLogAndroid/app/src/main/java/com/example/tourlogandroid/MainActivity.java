@@ -1,5 +1,4 @@
 package com.example.tourlogandroid;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;

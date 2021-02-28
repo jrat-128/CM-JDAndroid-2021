@@ -8,41 +8,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1067500497554:android:9d8e19c9ff916b664d544b",
-        "android_client_info": {
-          "package_name": "com.example.flutter_project_v1"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "1067500497554-i58esr577a7hdeu3rr32ethnpcj1ipb4.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAhFp7R3Gol9fQkjNnhX_TBmeyguKHyHYQ"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "1067500497554-i58esr577a7hdeu3rr32ethnpcj1ipb4.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:1067500497554:android:c58253847b4621e24d544b",
         "android_client_info": {
           "package_name": "com.example.tourlogandroid"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "1067500497554-ao47mfi1bn4um85n76shtc70ebrno2fm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tourlogandroid",
+            "certificate_hash": "a04ae4cef84cc5c98365ddad4bfce9676e9c8fc1"
+          }
+        },
         {
           "client_id": "1067500497554-i58esr577a7hdeu3rr32ethnpcj1ipb4.apps.googleusercontent.com",
           "client_type": 3

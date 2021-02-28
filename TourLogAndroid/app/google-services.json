@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "1067500497554-kie8376v0a60fmuqd453c257o950q0mk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tourlogandroid",
+            "certificate_hash": "19e6d453da6f66faca0a3def368150de55e56a94"
+          }
+        },
+        {
           "client_id": "1067500497554-i58esr577a7hdeu3rr32ethnpcj1ipb4.apps.googleusercontent.com",
           "client_type": 3
         }

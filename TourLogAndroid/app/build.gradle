@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.tourlogandroid"
-        minSdkVersion 16
+        minSdkVersion defaultMinSdkVersion
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -31,6 +31,11 @@ android {
         includeInApk true
         includeInBundle true
     }
+
+    configurations.all {
+        resolutionStrategy {
+            force 'com.android.support:support-v4:27.1.0'
+        }}
 }
 
 apply plugin: 'com.android.application'
@@ -72,5 +77,5 @@ dependencies {
     implementation ("com.github.bumptech.glide:glide:4.11.0") {
         exclude group: "com.android.support"
     }
-    implementation "com.android.support:support-fragment:26.1.0"
+    implementation "com.android.support:support-fragment:22.1.0"
 }

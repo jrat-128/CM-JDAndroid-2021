@@ -38,7 +38,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class CameraFragment extends Fragment {
 
-    private CameraViewModel cameraViewModel;
+
 
     private static final int PERMISSION_CODE = 1000;
     private static final int IMAGE_CAPTURE_CODE = 1001;
@@ -52,8 +52,6 @@ public class CameraFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        cameraViewModel =
-                new ViewModelProvider(this).get(CameraViewModel.class);
         View root = inflater.inflate(R.layout.fragment_camera, container, false);
 
         mImageView = root.findViewById(R.id.image_view);

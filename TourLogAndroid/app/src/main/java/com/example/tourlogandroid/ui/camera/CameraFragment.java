@@ -46,9 +46,6 @@ public class CameraFragment extends Fragment {
     Button mCaptureBtn;
     ImageView mImageView;
     Uri image_uri;
-    String imageFileName;
-
-    String currentPhotoPath;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -73,16 +70,7 @@ public class CameraFragment extends Fragment {
         String imageFileName = "TourLog_" + timeStamp + "_";
         values.put(MediaStore.Images.Media.TITLE, imageFileName);
         values.put(MediaStore.Images.Media.DESCRIPTION, "Image taken through TourLog");
-/*
-        // folder path
-        String folderPath = Environment.getExternalStorageDirectory() + "/TourLog";
-        File folder = new File(folderPath);
-        if (!folder.exists()) { // create folder if it does not yet exist
-            File wallpaperDirectory = new File(folderPath);
-            wallpaperDirectory.mkdirs();
-        }
-        path_uri.fromFile(folder);
-*/
+
         image_uri = getActivity().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
         //Camera intent
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);

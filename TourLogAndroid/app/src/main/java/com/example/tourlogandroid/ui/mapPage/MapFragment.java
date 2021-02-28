@@ -255,6 +255,7 @@ public class MapFragment extends Fragment implements GoogleMap.OnCameraMoveListe
                     Map<String,Object> favorite = new HashMap<>();
                     favorite.put("name",tmp.getName());
                     favorite.put("address",tmp.getAddress());
+                    favorite.put("iD",tmp.getiD());
                     db.collection("favorites")
                             .add(favorite)
                             .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {

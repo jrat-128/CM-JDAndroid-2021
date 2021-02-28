@@ -3,12 +3,30 @@ package com.example.tourlogandroid.ui.favourites;
 public class dbModelFavorites {
     private String name;
     private String address;
+    private String iD;
 
-    private dbModelFavorites(){}
+    public dbModelFavorites(){}
 
-    private dbModelFavorites(String name,String address){
+    public dbModelFavorites(String name, String address, String iD){
         this.name = name;
         this.address = address;
+        this.iD = iD;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getiD() {
+        return iD;
+    }
+
+    public void setiD(String iD) {
+        this.iD = iD;
     }
 
     public void setName(String name) {
@@ -19,11 +37,5 @@ public class dbModelFavorites {
         this.address = address;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public String getAddress() {
-        return address;
-    }
 }
